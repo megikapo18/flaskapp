@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="text-success">Update User's Magazine</h1>
+    <div>
+        <a class="text-white btn btn-primary" href="/addMagazine">Add Magazine </a>
+        <a class="text-white btn btn-primary" href="/">Dashboard </a>
+        <a class="text-white btn btn-danger" href="/logout">Log out</a>
+    </div>
+    <div class="d-flex p-2 ">
+        <div class=" container card card-header p-3 mb-2 bg-dark text-light w-50 mt-3 mx-1">
+            <h1>Update User</h1>
+            <form action="/update/{{user.id}}" method="post">
+                <input type="hidden" name="user_id" value="{{user.id}}">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="name"> Name</label>
+                        <input type="name" value="{{user.name}}" class="form-control" name="name">
+                    </div>
+                    <div>
+                        {% with messages = get_flashed_messages(category_filter=["name"]) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="text-danger">{{message}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        </div>
+
+                    <div class="form-group">
+                        <label for="lastName"> Last Name</label>
+                        <input type="lastName" value="{{user.lastName}}" class="form-control" name="lastName">
+                    </div>
+                    <div>
+                        {% with messages = get_flashed_messages(category_filter=["lastName"]) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <p class="text-danger">{{message}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"> Email</label>
+                            <input type="email" value="{{user.email}}" class="form-control" name="email">
+                        </div>
+                        <div>
+                            {% with messages = get_flashed_messages(category_filter=["email"]) %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <p class="text-danger">{{message}}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            </div>
+                </div>   
+                <input class="btn btn-success" type="submit" value="Update User">
+            </form>
+        </div>
+        <div class=" container card card-header p-3 mb-2 bg-dark text-light w-50 mt-3 mx-1">
+            <h1>Users' Magazine </h1>
+            {% for magazine in user_magazine %}
+            <h3>{{magazine.title}}</h3> 
+                {% if user.id == magazine.user_id %}
+                    <a href="/delete/{{magazine.id}}">Delete </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

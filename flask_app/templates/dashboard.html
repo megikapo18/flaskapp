@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magazine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="bg-dark d-flex justify-content-evenly my-auto">
+        <h1 class="text-white">Welcome {{loginUser.name}} {{loginUser.lastName}}</h1>
+        <div>
+            <a class="text-white btn btn-primary" href="/addMagazine">Add Magazine </a>
+            <a class="text-white btn btn-primary" href="/account">Account </a>
+            <a class="text-white btn btn-danger" href="/logout">Log out</a>
+        </div>
+    </nav>
+    <h1 class="text-success"> Magazines:</h1>
+    <div class=" d-flex justify-content-evenly my-auto">
+    {% for magazine in all_magazine %}
+    <table>
+    <tr>
+        <th><h3><a href="/showmagazine/{{magazine.id}}">{{magazine.title}} </a> add by {{ magazine.name }} {{ magazine.lastName }}</h3></th>
+    </tr>
+    <tr>
+    <div class="d-flex">
+        {% if magazine.id not in user_subcribe_magazine %}
+        <th><a class="btn btn-warning mx-2" href="/subcribe/{{magazine.id}}">Subcribe</a></th>
+        {% endif %}
+        {% if magazine.id in user_subcribe_magazine %}
+        <th><a class="btn btn-warning mx-2" href="/unsubcribe/{{magazine.id}}">Unsubcribe</a></th>
+        {% endif %}
+    </div>
+    </tr>
+    </table>
+    {% endfor %}
+    </div>
+    
+</body>
+</html>
+</body>
+</html>
